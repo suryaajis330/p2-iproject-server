@@ -49,15 +49,17 @@ app.get('/track', async (req, res, next) => {
 
 app.get('/search', async (req, res, next) => {
   try {
-    const search = await axios({
+    const { search } = req.query
+
+    const searchApi = await axios({
       baseURL: "https://api.deezer.com/search",
       method: "GET",
       params: {
-        q: "alanwalker"
+        q: search
       }
     })
 
-    console.log(search.data)
+    console.log(searchApi.data)
   } catch (err) {
     console.log(err)
   }
