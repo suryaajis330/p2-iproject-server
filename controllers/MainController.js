@@ -76,18 +76,37 @@ class MainController {
 
   static async changeStatusFavorite(req, res, next) {
     try {
-      
+      const { status } = req.body;
+      const favoriteId = +req.params.id;
+
+      const response = await Favorite.update(
+        { status },
+        {
+          where: {
+            id: favoriteId,
+          },
+        }
+      );
+
+      res.status(200).json({message: "Status has been changed"})
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
   static async deleteFavorite(req, res, next) {
     try {
-      
+      const favoriteId = +req.params.id
 
+      await Favorite.destroy({
+        where: {
+          id: favoriteId
+        }
+      })
+
+      res.status(200).json({message: "Favorite has been deleted"})
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 }
