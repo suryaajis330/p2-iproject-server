@@ -1,8 +1,14 @@
-const express= require('express')
-const musicRouter = express.Router()
+const express = require("express");
+const musicRouter = express.Router();
+const MainController = require("../controllers/MainController");
+const { authZ } = require("../middlewares/auth");
 
-musicRouter.get('/', (req, res, next) => {
-  res.status(200).json({message: 'Into music router'})
-})
+musicRouter.get("/", MainController.readRecomendedSongs);
+musicRouter.post("/", MainController.createSong);
+musicRouter.get("/favorites", MainController.readFavorites);
+musicRouter.post("/favorites/:id", MainController.createFavorite);
 
-module.exports = musicRouter
+musicRouter.patch("/favorites/:id", authZ, MainController.changeStatusFavorite);
+musicRouter.delete("/favorites/:id", authZ, MainController.deleteFavorite);
+
+module.exports = musicRouter;

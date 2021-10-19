@@ -11,13 +11,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    const data = require("../data/genres.json");
+    const data = require("../data/songs.json");
     data.forEach((el) => {
       el.createdAt = new Date();
       el.updatedAt = new Date();
     });
 
-    await queryInterface.bulkInsert("Genres", data);
+    await queryInterface.bulkInsert("Songs", data);
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -27,6 +27,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Genres", null, {});
+    await queryInterface.bulkDelete("Songs", null, {});
   },
 };
