@@ -76,7 +76,7 @@ app.get("/user", async (req, res, next) => {
       url: `https://avatars.dicebear.com/api/avataaars/${fullName}.svg`,
       method: 'GET',
       params: {
-        size: "100"
+        size: "50"
       }
     })
 

@@ -18,6 +18,9 @@ const errors = (err, req, res, next ) => {
   } else if (err.name === "InvalidToken") {
     code = 400
     msg = "Invalid token"
+  } else if (err.name === "NotFound") {
+    code = 404
+    msg = "Data not found"
   }
 
 
