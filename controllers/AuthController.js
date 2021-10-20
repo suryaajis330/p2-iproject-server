@@ -89,6 +89,7 @@ class AuthController {
           fullName: fullNameGoogle,
           password: Math.random().toString(36).slice(-8),
           role: "Customer",
+          imgUrl
         },
       });
 
@@ -97,7 +98,7 @@ class AuthController {
         fullName: user.fullName,
         email: user.email,
         role: user.role,
-        imgUrl
+        imgUrl: user.imgUrl
       };
 
       const tokenFromServer = signToken(dataUser);

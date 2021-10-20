@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "google-auth-library": "^7.10.1",
     "jsonwebtoken": "^8.5.1",
+    "musicmatch": "^0.3.2",
     "pg": "^8.7.1",
     "sequelize": "^6.7.0"
   },

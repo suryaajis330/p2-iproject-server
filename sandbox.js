@@ -71,19 +71,19 @@ app.get("/search", async (req, res, next) => {
 
 app.get("/user", async (req, res, next) => {
   try {
-    const { fullName } = req.body
+    const { fullName } = req.body;
     const avatar = await axios({
       url: `https://avatars.dicebear.com/api/avataaars/${fullName}.svg`,
-      method: 'GET',
+      method: "GET",
       params: {
-        size: "50"
-      }
-    })
+        size: "50",
+      },
+    });
 
     const ui = await axios({
       url: "https://ui-avatars.com/api/?name=John+Doe",
-      method: "GET"
-    })
+      method: "GET",
+    });
 
     // let svg = createAvatar(style, {
     //   seed: "custom",
@@ -92,6 +92,32 @@ app.get("/user", async (req, res, next) => {
     console.log(avatar.data);
     // console.log(svg)
     // console.log(ui)
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+const music = require("musicmatch")({
+  apikey: "ae168ce2c53d1833d6346f88a6d3d0ac",
+});
+
+app.get("/match", async (req, res, next) => {
+  try {
+    const { title, artistName } = req.query;
+    const response = await music.matcherLyrics({
+      q_track: title,
+      q_artist: artistName,
+    });
+
+    // const response = await music.trackSearch({
+    //   q: `${artistName} - ${title}}`,
+    //   page: 1,
+    //   page_size: 3,
+    // });
+
+    // console.log(response.message.body.track_list);
+    console.log(response)
+    res.status(200).json(response.message.body);
   } catch (err) {
     console.log(err);
   }

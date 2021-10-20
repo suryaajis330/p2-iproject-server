@@ -62,6 +62,7 @@ class MainController {
         where: {
           UserId: req.user.id,
         },
+        include: Song
       });
 
       if (!response) {
@@ -107,6 +108,16 @@ class MainController {
       res.status(200).json({message: "Favorite has been deleted"})
     } catch (err) {
       next(err);
+    }
+  }
+
+  static async findMusicDeezer(req, res, next) {
+    try {
+      const dataSearch = req.music
+      
+      res.status(200).json(dataSearch)
+    } catch (err) {
+      next(err)
     }
   }
 }
