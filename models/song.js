@@ -47,6 +47,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         notEmpty: true,
       },
+      lyrics: {
+        type: DataTypes.TEXT,
+        notEmpty: true,
+      },
     },
     {
       sequelize,

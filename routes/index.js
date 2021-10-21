@@ -11,6 +11,7 @@ router.post("/login", AuthController.login);
 router.post("/loginGoogle", createAvatar, AuthController.loginGoogle);
 
 router.use(authN);
+router.get('/user', AuthController.getUser)
 router.use("/music", musicRouter);
 
 router.use(errors);

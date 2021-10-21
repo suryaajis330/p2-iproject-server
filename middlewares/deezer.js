@@ -1,8 +1,5 @@
 const axios = require('axios')
 
-let code = "fredc1ddedd58b5b1e2f85a14a024de3"
-let access_token = "fr2gBtTSFek2JU3YiEkHQqDOt1MdLXx6KEBQrLpsdgEvOrATgg"
-
 const deezer = axios.create({
   baseURL: "https://api.deezer.com"
 })

@@ -108,6 +108,16 @@ class AuthController {
       next(err);
     }
   }
+
+  static async getUser(req, res, next) {
+    try {
+      const response = await User.findByPk(req.user.id)
+
+      res.status(200).json(response)
+    } catch (err) {
+      next(err)
+    }
+  }
 }
 
 module.exports = AuthController;

@@ -1,11 +1,6 @@
-const axios = require("axios");
 const { OAuth2Client } = require("google-auth-library");
 const clientId = process.env.GSIGNIN_CLIENTID;
 const client = new OAuth2Client(clientId);
-
-const avatars = axios.create({
-  baseURL: "https://avatars.dicebear.com/api/avataaars",
-});
 
 const createAvatar = async (req, res, next) => {
   try {
@@ -25,19 +20,9 @@ const createAvatar = async (req, res, next) => {
       name = fullNameGoogle;
     }
 
-    const avatarUrl = await avatars({
-      url: `/${name}.svg`,
-      method: "GET",
-      params: {
-        size: 50,
-      },
-    });
+    let avatarUrl = `https://avatars.dicebear.com/api/avataaars/${name}.svg?size=50`
 
-    if (!avatarUrl) {
-      throw { name: "AvatarError" };
-    }
-
-    req.body.imgUrl = avatarUrl.data;
+    req.body.imgUrl = avatarUrl;
 
     next();
   } catch (err) {

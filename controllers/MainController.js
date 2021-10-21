@@ -17,7 +17,7 @@ class MainController {
 
   static async createSong(req, res, next) {
     try {
-      const { title, duration, artist, cover, songUrl, fullSongUrl } = req.body;
+      const { title, duration, artist, cover, songUrl, fullSongUrl, lyrics } = req.body;
 
       const response = await Song.create({
         title,
@@ -26,6 +26,7 @@ class MainController {
         cover,
         songUrl,
         fullSongUrl,
+        lyrics
       });
 
       res.status(201).json(response);
@@ -80,7 +81,7 @@ class MainController {
       const { status } = req.body;
       const favoriteId = +req.params.id;
 
-      const response = await Favorite.update(
+      await Favorite.update(
         { status },
         {
           where: {
