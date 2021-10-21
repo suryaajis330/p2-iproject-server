@@ -89,6 +89,7 @@ class AuthController {
           fullName: fullNameGoogle,
           password: Math.random().toString(36).slice(-8),
           role: "Customer",
+          imgUrl
         },
       });
 
@@ -97,7 +98,7 @@ class AuthController {
         fullName: user.fullName,
         email: user.email,
         role: user.role,
-        imgUrl
+        imgUrl: user.imgUrl
       };
 
       const tokenFromServer = signToken(dataUser);
@@ -105,6 +106,16 @@ class AuthController {
       res.status(200).json({ access_token: tokenFromServer });
     } catch (err) {
       next(err);
+    }
+  }
+
+  static async getUser(req, res, next) {
+    try {
+      const response = await User.findByPk(req.user.id)
+
+      res.status(200).json(response)
+    } catch (err) {
+      next(err)
     }
   }
 }
