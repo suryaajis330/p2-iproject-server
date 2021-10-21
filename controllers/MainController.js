@@ -1,4 +1,4 @@
-const { Song, Favorite } = require("../models");
+const { Song, Favorite, Lyric } = require("../models");
 
 class MainController {
   static async readRecomendedSongs(req, res, next) {
@@ -117,6 +117,41 @@ class MainController {
       const dataSearch = req.music
       
       res.status(200).json(dataSearch)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async createLyric(req, res, next) {
+    try {
+      const { title, lyrics } = req.body
+
+      const foundSong = await Song.findOne({
+        where: {
+          title
+        }
+      })
+
+      if(!foundSong) {
+        throw {name: "NotFound"}
+      }
+
+      const response = await Lyric.create({
+        title,
+        lyrics
+      })
+
+      res.status(201).json(response)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async findLyrics(req, res, next) {
+    try {
+      const { lyrics } = req.body
+      
+      res.status(200).json(lyrics)
     } catch (err) {
       next(err)
     }
