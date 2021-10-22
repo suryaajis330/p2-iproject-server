@@ -17,7 +17,7 @@ class MainController {
 
   static async createSong(req, res, next) {
     try {
-      const { title, duration, artist, cover, songUrl, fullSongUrl, lyrics } = req.body;
+      const { title, duration, artist, cover, songUrl, fullSongUrl } = req.body;
 
       const response = await Song.create({
         title,
@@ -25,8 +25,7 @@ class MainController {
         artist,
         cover,
         songUrl,
-        fullSongUrl,
-        lyrics
+        fullSongUrl
       });
 
       res.status(201).json(response);
